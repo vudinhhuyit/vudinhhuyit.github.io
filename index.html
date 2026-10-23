@@ -2,9 +2,619 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8">
-<title>Talk Wallet</title>
-<meta http-equiv="refresh" content="0; url=/Talk-Wallet-Support/">
-<link rel="canonical" href="/Talk-Wallet-Support/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vũ Đình Huy · Lập trình viên phát triển ứng dụng</title>
+<meta name="description" content="Vũ Đình Huy — Lập trình viên phát triển ứng dụng tại Hà Nội. Các ứng dụng và công cụ do mình tự làm.">
+<meta property="og:title" content="Vũ Đình Huy · Lập trình viên phát triển ứng dụng">
+<meta property="og:description" content="Lập trình viên phát triển ứng dụng tại Hà Nội. Xem các ứng dụng và dự án cá nhân của mình.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23f2c4ff%22/%3E%3Ctext x=%2250%22 y=%2268%22 text-anchor=%22middle%22 font-family=%22Arial,sans-serif%22 font-weight=%22800%22 font-size=%2252%22 fill=%22%232b1236%22%3EH%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fcfaff;
+    --bg-soft: #f5effa;
+    --card: #ffffff;
+    --ink: #1e1a22;
+    --muted: #675f6e;
+    --line: #ece4f2;
+    --accent: #f2c4ff;
+    --accent-2: #d9b8ff;
+    --accent-strong: #8e3bb0;
+    --accent-ink: #2b1236;
+    --accent-soft: #fbeeff;
+    --green: #2f9e6e;
+    --shadow: 0 1px 2px rgba(50, 20, 70, .05), 0 8px 24px rgba(50, 20, 70, .07);
+    --radius: 20px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #141117;
+      --bg-soft: #1d1922;
+      --card: #221d27;
+      --ink: #f3eef6;
+      --muted: #a59cad;
+      --line: #332c3a;
+      --accent-strong: #f2c4ff;
+      --accent-soft: #33243b;
+      --green: #4cc392;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .25);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #141117;
+    --bg-soft: #1d1922;
+    --card: #221d27;
+    --ink: #f3eef6;
+    --muted: #a59cad;
+    --line: #332c3a;
+    --accent-strong: #f2c4ff;
+    --accent-soft: #33243b;
+    --green: #4cc392;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .25);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Be Vietnam Pro", system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  img { display: block; max-width: 100%; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+
+  /* Nav */
+  .nav {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: saturate(160%) blur(12px);
+    -webkit-backdrop-filter: saturate(160%) blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color .2s;
+  }
+  .nav.scrolled { border-bottom-color: var(--line); }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; text-decoration: none; }
+  .brand .mono { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; font-size: 15px; font-weight: 800; color: var(--accent-ink); background: linear-gradient(140deg, var(--accent), var(--accent-2)); }
+  .nav-links { display: flex; gap: 4px; align-items: center; }
+  .nav-links a {
+    text-decoration: none; font-size: 15px; font-weight: 500; color: var(--muted);
+    padding: 8px 12px; border-radius: 999px; transition: color .15s, background .15s;
+  }
+  .nav-links a:hover { color: var(--ink); background: var(--bg-soft); }
+  .theme-btn {
+    width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line);
+    background: var(--card); color: var(--ink); cursor: pointer; display: grid; place-items: center;
+    margin-left: 6px;
+  }
+  .theme-btn svg { width: 18px; height: 18px; }
+  .lang-switch {
+    display: inline-flex; padding: 3px; margin-left: 6px; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--card);
+  }
+  .lang-switch button {
+    border: 0; background: none; color: var(--muted); cursor: pointer; font: inherit;
+    font-size: 13px; font-weight: 700; padding: 5px 10px; border-radius: 999px; transition: background .15s, color .15s;
+  }
+  .lang-switch button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+
+  /* Hero */
+  .hero { padding: 72px 0 56px; }
+  .hero-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 48px; align-items: center; }
+  .hello {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent-soft); color: var(--accent-strong);
+    font-weight: 600; font-size: 14px; padding: 6px 14px; border-radius: 999px;
+  }
+  .hello .wave { display: inline-block; animation: wave 2.4s ease-in-out infinite; transform-origin: 70% 70%; }
+  @keyframes wave {
+    0%, 60%, 100% { transform: rotate(0); }
+    10%, 30% { transform: rotate(14deg); }
+    20% { transform: rotate(-8deg); }
+    40% { transform: rotate(-4deg); }
+    50% { transform: rotate(10deg); }
+  }
+  h1 {
+    font-size: clamp(36px, 6vw, 58px); line-height: 1.1; letter-spacing: -0.02em;
+    margin: 18px 0 16px; font-weight: 800;
+  }
+  h1 .hl { color: var(--accent-strong); }
+  .socials { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 22px; }
+  .lead { font-size: 18px; color: var(--muted); max-width: 34em; margin: 0 0 28px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 10px 18px; color: var(--muted); font-size: 15px; margin-bottom: 32px; }
+  .meta span { display: inline-flex; align-items: center; gap: 6px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px color-mix(in srgb, var(--green) 20%, transparent); }
+  .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+    font-weight: 600; font-size: 15px; padding: 12px 20px; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--card); color: var(--ink);
+    transition: transform .15s, box-shadow .15s, background .15s;
+    cursor: pointer; font-family: inherit;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+  .btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .btn svg { width: 18px; height: 18px; flex: none; }
+  .btn.sm { font-size: 14px; padding: 8px 14px; }
+  .btn.sm svg { width: 16px; height: 16px; }
+
+  .portrait { position: relative; justify-self: center; width: min(340px, 80vw); aspect-ratio: 1; }
+  .portrait .blob {
+    position: absolute; inset: 6%;
+    background: linear-gradient(140deg, var(--accent) 0%, var(--accent-2) 100%);
+    border-radius: 42% 58% 55% 45% / 48% 42% 58% 52%;
+    animation: morph 12s ease-in-out infinite;
+  }
+  @keyframes morph {
+    0%, 100% { border-radius: 42% 58% 55% 45% / 48% 42% 58% 52%; }
+    50% { border-radius: 58% 42% 45% 55% / 42% 58% 42% 58%; }
+  }
+  .portrait .avatar {
+    position: absolute; inset: 15%; border-radius: 50%; overflow: hidden;
+    border: 6px solid var(--card); box-shadow: var(--shadow); background: var(--card);
+  }
+  .portrait .avatar { display: grid; place-items: center; font-size: clamp(88px, 24vw, 128px); font-weight: 800; line-height: 1; color: var(--accent-strong); }
+  .float-icon {
+    position: absolute; width: 60px; height: 60px; border-radius: 15px; overflow: hidden;
+    box-shadow: var(--shadow); border: 3px solid var(--card); background: var(--card);
+    animation: bob 5s ease-in-out infinite;
+  }
+  .float-icon img { width: 100%; height: 100%; object-fit: cover; }
+  .float-icon.a { top: 2%; right: 4%; }
+  .float-icon.b { bottom: 8%; left: -2%; animation-delay: -1.6s; }
+  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+  /* Sections */
+  section { padding: 64px 0; }
+  .eyebrow { color: var(--accent-strong); font-weight: 700; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; }
+  h2 { font-size: clamp(28px, 4vw, 38px); line-height: 1.2; letter-spacing: -0.02em; margin: 8px 0 12px; font-weight: 800; }
+
+  /* Projects */
+  .group-title { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 700; margin: 0 0 16px; }
+  .group-title .count { font-size: 13px; font-weight: 600; color: var(--muted); background: var(--bg-soft); border: 1px solid var(--line); padding: 2px 10px; border-radius: 999px; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .grid.three { grid-template-columns: repeat(3, 1fr); margin-top: 20px; }
+  .grid + .group-title { margin-top: 44px; }
+  .project {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 24px; display: flex; flex-direction: column; gap: 14px;
+    transition: transform .2s, box-shadow .2s, border-color .2s;
+  }
+  .project:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: color-mix(in srgb, var(--accent-strong) 35%, var(--line)); }
+  .project.wide { grid-column: 1 / -1; }
+  .shot { width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--line); }
+  .p-head { display: flex; gap: 16px; align-items: center; }
+  .app-icon { width: 64px; height: 64px; border-radius: 15px; flex: none; box-shadow: 0 4px 12px rgba(0, 0, 0, .12); object-fit: cover; background: var(--bg-soft); }
+  .p-head h3 { margin: 0; font-size: 20px; line-height: 1.3; }
+  .p-head .sub { color: var(--muted); font-size: 14px; }
+  .project p { margin: 0; color: var(--muted); font-size: 15px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: var(--bg-soft); color: var(--muted); }
+  .tag.live { background: color-mix(in srgb, var(--green) 15%, transparent); color: var(--green); }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 4px; }
+  .links a {
+    font-size: 14px; font-weight: 600; text-decoration: none; padding: 8px 14px; border-radius: 999px;
+    border: 1px solid var(--line); transition: background .15s, border-color .15s;
+  }
+  .links a:hover { background: var(--bg-soft); }
+  .links a.go { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .links a.go:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+
+  /* Contact */
+  .contact {
+    background: linear-gradient(140deg, var(--accent) 0%, var(--accent-2) 100%);
+    color: var(--accent-ink); border-radius: 28px; padding: 48px; text-align: center; position: relative; overflow: hidden;
+  }
+  .contact h2 { margin-top: 0; }
+  .contact p { margin: 0 auto 28px; max-width: 32em; font-size: 17px; }
+  .contact .ctas { justify-content: center; }
+  .contact .btn { background: rgba(255, 255, 255, .45); border-color: rgba(255, 255, 255, .75); color: var(--accent-ink); }
+  .contact .btn.primary { background: #fff; color: #6a2390; border-color: #fff; }
+  .toast {
+    position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); opacity: 0;
+    background: var(--ink); color: var(--bg); padding: 10px 18px; border-radius: 999px;
+    font-size: 14px; font-weight: 600; transition: opacity .2s, transform .2s; pointer-events: none; z-index: 20;
+  }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+  footer { padding: 32px 0 48px; color: var(--muted); font-size: 14px; }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  footer a { text-decoration: none; }
+  footer a:hover { color: var(--accent-strong); }
+
+  /* Reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  @media (max-width: 860px) {
+    .hero { padding: 40px 0 32px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+    .portrait { order: -1; width: min(260px, 70vw); }
+    .grid, .grid.three { grid-template-columns: 1fr; }
+    .contact { padding: 36px 20px; }
+  }
+  @media (max-width: 560px) {
+    .wrap { padding: 0 16px; }
+    .nav-links a:not(.keep) { display: none; }
+  }
+  @media (max-width: 400px) {
+    .nav-links a { display: none; }
+    .ctas .btn { flex: 1 1 auto; justify-content: center; }
+    section { padding: 48px 0; }
+  }
+</style>
 </head>
-<body><a href="/Talk-Wallet-Support/">Talk Wallet</a></body>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <span class="mono" aria-hidden="true">H</span>
+      <span>Vũ Đình Huy</span>
+    </a>
+    <div class="nav-links">
+      <a href="#projects" data-i18n="nav.projects">Dự án</a>
+      <a href="#contact" class="keep" data-i18n="nav.contact">Liên hệ</a>
+      <div class="lang-switch" role="group" aria-label="Ngôn ngữ / Language">
+        <button type="button" data-lang="vi" aria-pressed="true">VI</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="theme-btn" id="themeBtn" aria-label="Đổi giao diện sáng/tối" data-i18n-aria="nav.theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="hello"><span class="wave">👋</span> <span data-i18n="hero.hello">Xin chào, rất vui được gặp bạn!</span></span>
+      <h1 data-i18n="hero.title">Mình là <span class="hl">Huy</span>.</h1>
+      <div class="socials">
+        <a class="btn sm" href="https://github.com/vudinhhuyit" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3"/></svg>
+          GitHub
+        </a>
+        <a class="btn sm" href="https://www.linkedin.com/in/vudinhhuy" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+      <p class="lead" data-i18n="hero.lead">
+        Lập trình viên phát triển ứng dụng. Từ ý tưởng tới ứng dụng.
+      </p>
+      <div class="meta">
+        <span><span class="dot"></span> <span data-i18n="hero.open">Sẵn sàng cho cơ hội mới</span></span>
+        <span data-i18n="hero.location">📍 Hà Nội, Việt Nam</span>
+      </div>
+      <div class="ctas">
+        <a class="btn primary" href="#projects">
+          <span data-i18n="hero.cta">Xem dự án</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn" href="mailto:vudinhhuyit@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg>
+          <span data-i18n="hero.email">Gửi email</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="portrait" aria-hidden="true">
+      <div class="blob"></div>
+      <div class="avatar">H</div>
+      <div class="float-icon a"><img src="https://vudinhhuyit.github.io/Talk-Wallet-Support/icon.png" alt=""></div>
+      <div class="float-icon b"><img src="https://vudinhhuyit.github.io/Doc2Markdown/assets/icons/icon128.png" alt=""></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="projects">
+    <div class="wrap">
+      <div class="eyebrow" data-i18n="projects.eyebrow">Dự án cá nhân</div>
+      <h2 style="margin-bottom: 32px" data-i18n="projects.title">Những thứ mình đã làm ra trên GitHub</h2>
+
+      <div class="group-title">📱 <span data-i18n="projects.ios">Ứng dụng iOS</span> <span class="count">1</span></div>
+      <div class="grid">
+        <article class="project wide reveal">
+          <img class="shot" src="assets/talk-wallet.jpg" width="2000" height="1125" loading="lazy" data-i18n-alt="tw.shot"
+               alt="Talk Wallet — Quản lý tài chính qua giọng nói: nói “Ăn trưa 50k”, app ghi −50.000 ₫ vào danh mục Ăn uống">
+          <div class="p-head">
+            <img class="app-icon" src="https://vudinhhuyit.github.io/Talk-Wallet-Support/icon.png" alt="Biểu tượng Talk Wallet" data-i18n-alt="tw.icon" loading="lazy">
+            <div>
+              <h3>Talk Wallet</h3>
+              <div class="sub" data-i18n="tw.sub">Quản lý tài chính qua giọng nói</div>
+            </div>
+          </div>
+          <p data-i18n="tw.desc">
+            Nói một câu — Talk Wallet ghi thu chi, chia danh mục và học cách bạn nói. Chỉ cần nói “Ăn trưa 50k”,
+            app tự ghi −50.000 ₫ vào mục Ăn uống, cho bạn xem trước giao dịch trước khi lưu. Hiểu cả tiếng lóng
+            như “5 củ”, “năm chục”; có tổng quan theo ngày/tuần/tháng/năm, biểu đồ theo danh mục, ngân sách tháng
+            và các khoản hay dùng chỉ cần chạm để ghi.
+          </p>
+          <div class="tags">
+            <span class="tag live" data-i18n="tw.tag1">● Đã có trên App Store</span>
+            <span class="tag" data-i18n="tw.tag2">Nhận diện giọng nói</span>
+            <span class="tag" data-i18n="tw.tag3">Tài chính cá nhân</span>
+          </div>
+          <div class="links">
+            <a class="go" href="https://apps.apple.com/app/id6822734483" target="_blank" rel="noopener" data-i18n="tw.download">Tải trên App Store</a>
+            <a href="/Talk-Wallet-Support/" data-i18n="common.more">Trang giới thiệu</a>
+          </div>
+        </article>
+      </div>
+
+      <!-- Tạm ẩn: Wheely, Snoring, Red Ball
+      <div class="grid three">
+        <article class="project reveal">
+          <div class="p-head">
+            <img class="app-icon" src="https://raw.githubusercontent.com/vudinhhuyit/Wheely-SpriteKit-App-Support/master/icon.png" alt="Biểu tượng Wheely" loading="lazy">
+            <div>
+              <h3>Wheely</h3>
+              <div class="sub">Xe nhỏ giải đố</div>
+            </div>
+          </div>
+          <p>
+            Game giải đố vật lý với chú xe đỏ dũng cảm. Quay bánh răng, kéo cần gạt, căn thời gian thật chuẩn để
+            vượt cầu gãy, lưỡi cưa, camera an ninh và cả cuộc rượt đuổi của cảnh sát.
+          </p>
+          <div class="tags"><span class="tag">SpriteKit</span><span class="tag">Puzzle</span><span class="tag">Vật lý</span></div>
+          <div class="links">
+            <a class="go" href="https://github.com/vudinhhuyit/Wheely-SpriteKit-App-Support" target="_blank" rel="noopener">Xem dự án</a>
+          </div>
+        </article>
+
+        <article class="project reveal">
+          <div class="p-head">
+            <img class="app-icon" src="https://vudinhhuyit.github.io/Snoring-Spritekit-App-Support/icon.png" alt="Biểu tượng Snoring" loading="lazy">
+            <div>
+              <h3>Snoring</h3>
+              <div class="sub">Đánh thức chú voi</div>
+            </div>
+          </div>
+          <p>
+            Chú voi ngủ ngáy ầm ĩ trên mỏm đá, hãy giúp các con vật đánh thức nó! 35 màn chơi phản ứng dây chuyền:
+            chạm cú, ngựa vằn, bò, chim cánh cụt đúng lúc và để vật lý lo phần còn lại.
+          </p>
+          <div class="tags"><span class="tag">SpriteKit</span><span class="tag">35 màn chơi</span><span class="tag">Chain reaction</span></div>
+          <div class="links">
+            <a class="go" href="/Snoring-Spritekit-App-Support/">Xem dự án</a>
+          </div>
+        </article>
+
+        <article class="project reveal">
+          <div class="p-head">
+            <img class="app-icon" src="https://vudinhhuyit.github.io/Red-Ball-App-Support/icon.png" alt="Biểu tượng Red Ball" loading="lazy">
+            <div>
+              <h3>Red Ball</h3>
+              <div class="sub">Lăn, nhảy và né bẫy gai</div>
+            </div>
+          </div>
+          <p>
+            Platformer vật lý kinh điển với 12 màn chơi: đẩy hộp làm cầu, cưỡi xe, đi tàu, bật lò xo và
+            canh thời gian để lách qua rìu đung đưa cùng bãi chông sắc nhọn.
+          </p>
+          <div class="tags"><span class="tag">SpriteKit</span><span class="tag">Platformer</span><span class="tag">12 màn chơi</span></div>
+          <div class="links">
+            <a class="go" href="/Red-Ball-App-Support/">Xem dự án</a>
+          </div>
+        </article>
+      </div>
+      -->
+
+      <div class="group-title">🛠️ <span data-i18n="projects.tools">Công cụ năng suất</span> <span class="count">1</span></div>
+      <div class="grid">
+        <article class="project wide reveal">
+          <div class="p-head">
+            <img class="app-icon" src="https://vudinhhuyit.github.io/Doc2Markdown/assets/icons/icon128.png" alt="Biểu tượng Doc → Markdown" data-i18n-alt="d2m.icon" loading="lazy">
+            <div>
+              <h3>Doc → Markdown</h3>
+              <div class="sub">Web app & Chrome extension</div>
+            </div>
+          </div>
+          <p data-i18n="d2m.desc">
+            Chuyển Word, Excel, PDF sang Markdown sạch đẹp và xem Markdown như trên GitHub, ngay trong trình duyệt.
+            Mọi thứ chạy trên máy bạn, file không bao giờ bị tải lên máy chủ.
+          </p>
+          <div class="tags"><span class="tag live" data-i18n="d2m.tag">● Dùng thử ngay</span><span class="tag">JavaScript</span><span class="tag">Offline-first</span></div>
+          <div class="links">
+            <a class="go" href="/Doc2Markdown/app/viewer.html" data-i18n="d2m.open">Mở web app</a>
+            <a href="/Doc2Markdown/" data-i18n="common.more">Giới thiệu</a>
+          </div>
+        </article>
+
+        <!-- Tạm ẩn: Jira Helpers
+        <article class="project reveal">
+          <div class="p-head">
+            <div class="app-icon" style="display:grid;place-items:center;font-size:30px" aria-hidden="true">🗂️</div>
+            <div>
+              <h3>Jira Helpers</h3>
+              <div class="sub">Chrome extension cho Jira</div>
+            </div>
+          </div>
+          <p>
+            Tổng hợp task Jira trong tháng, xuất Excel, rồi log work hàng loạt từ chính file đó. Có chế độ
+            “Logwork nhanh 8h” và tự chống log trùng. Không cần API token.
+          </p>
+          <div class="tags"><span class="tag">Manifest V3</span><span class="tag">Jira API</span><span class="tag">SheetJS</span></div>
+          <div class="links">
+            <a class="go" href="https://github.com/vudinhhuyit/ProductivityTools" target="_blank" rel="noopener">Xem trên GitHub</a>
+          </div>
+        </article>
+        -->
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact reveal">
+        <h2 data-i18n="contact.title">Cùng làm điều gì đó hay ho nhé! ☕</h2>
+        <p data-i18n="contact.text">Có ý tưởng ứng dụng, cơ hội hợp tác hay chỉ muốn chào hỏi? Hộp thư của mình luôn mở, mình sẽ phản hồi sớm nhất có thể.</p>
+        <div class="ctas">
+          <a class="btn primary" href="mailto:vudinhhuyit@gmail.com" id="emailBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg>
+            vudinhhuyit@gmail.com
+          </a>
+          <button class="btn" type="button" id="copyBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            <span data-i18n="contact.copy">Sao chép email</span>
+          </button>
+          <a class="btn" href="https://www.linkedin.com/in/vudinhhuy" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+            LinkedIn
+          </a>
+          <a class="btn" href="https://github.com/vudinhhuyit" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Vũ Đình Huy · <span data-i18n="footer.made">Làm với ❤️ tại Hà Nội</span></span>
+    <span>
+      <a href="mailto:vudinhhuyit@gmail.com">Email</a> ·
+      <a href="https://github.com/vudinhhuyit" target="_blank" rel="noopener">GitHub</a> ·
+      <a href="https://www.linkedin.com/in/vudinhhuy" target="_blank" rel="noopener">LinkedIn</a>
+    </span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Theme toggle (remembered per browser)
+  const root = document.documentElement;
+  try {
+    const saved = localStorage.getItem('theme');
+    if (saved) root.dataset.theme = saved;
+  } catch (e) {}
+  document.getElementById('themeBtn').addEventListener('click', () => {
+    const isDark = root.dataset.theme
+      ? root.dataset.theme === 'dark'
+      : matchMedia('(prefers-color-scheme: dark)').matches;
+    root.dataset.theme = isDark ? 'light' : 'dark';
+    try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+  });
+
+  // Language: Vietnamese lives in the HTML, English comes from this table
+  const EN = {
+    'meta.title': 'Vũ Đình Huy · App Developer',
+    'meta.desc': 'Vũ Đình Huy — app developer based in Hanoi. Apps and tools I built myself.',
+    'nav.projects': 'Projects',
+    'nav.contact': 'Contact',
+    'nav.theme': 'Toggle light/dark theme',
+    'hero.hello': 'Hi there, nice to meet you!',
+    'hero.title': 'I’m <span class="hl">Huy</span>.',
+    'hero.lead': 'App developer. From idea to app.',
+    'hero.open': 'Open to new opportunities',
+    'hero.location': '📍 Hanoi, Vietnam',
+    'hero.cta': 'See projects',
+    'hero.email': 'Send email',
+    'projects.eyebrow': 'Side projects',
+    'projects.title': 'Things I’ve built on GitHub',
+    'projects.ios': 'iOS apps',
+    'projects.tools': 'Productivity tools',
+    'tw.shot': 'Talk Wallet — manage your money by voice: say “Lunch 50k” and the app records −50,000 ₫ under Food',
+    'tw.icon': 'Talk Wallet icon',
+    'tw.sub': 'Manage your money by voice',
+    'tw.desc': 'Say one sentence — Talk Wallet records income and expenses, sorts them into categories and learns how you talk. Just say “Ăn trưa 50k” (lunch 50k) and it logs −50,000 ₫ under Food, letting you preview the transaction before saving. It even understands Vietnamese slang like “5 củ” and “năm chục”, with daily/weekly/monthly/yearly overviews, category charts, monthly budgets and one-tap shortcuts for frequent expenses.',
+    'tw.tag1': '● On the App Store',
+    'tw.tag2': 'Speech recognition',
+    'tw.tag3': 'Personal finance',
+    'tw.download': 'Download on the App Store',
+    'common.more': 'Learn more',
+    'd2m.icon': 'Doc → Markdown icon',
+    'd2m.desc': 'Convert Word, Excel and PDF files to clean Markdown and view Markdown GitHub-style, right in your browser. Everything runs on your device; your files are never uploaded.',
+    'd2m.tag': '● Try it now',
+    'd2m.open': 'Open web app',
+    'contact.title': 'Let’s build something great together! ☕',
+    'contact.text': 'Have an app idea, a collaboration in mind, or just want to say hi? My inbox is always open and I’ll get back to you as soon as I can.',
+    'contact.copy': 'Copy email',
+    'footer.made': 'Made with ❤️ in Hanoi',
+  };
+  const metaDesc = document.querySelector('meta[name="description"]');
+  const swaps = [
+    ...[...document.querySelectorAll('[data-i18n]')].map((el) => ({ key: el.dataset.i18n, get: () => el.innerHTML, set: (v) => { el.innerHTML = v; } })),
+    ...[...document.querySelectorAll('[data-i18n-alt]')].map((el) => ({ key: el.dataset.i18nAlt, get: () => el.alt, set: (v) => { el.alt = v; } })),
+    ...[...document.querySelectorAll('[data-i18n-aria]')].map((el) => ({ key: el.dataset.i18nAria, get: () => el.getAttribute('aria-label'), set: (v) => el.setAttribute('aria-label', v) })),
+    { key: 'meta.title', get: () => document.title, set: (v) => { document.title = v; } },
+    { key: 'meta.desc', get: () => metaDesc.content, set: (v) => { metaDesc.content = v; } },
+  ];
+  swaps.forEach((sw) => { sw.vi = sw.get(); });
+
+  let lang = 'vi';
+  const langBtns = document.querySelectorAll('.lang-switch button');
+  const setLang = (next) => {
+    lang = next === 'en' ? 'en' : 'vi';
+    root.lang = lang;
+    swaps.forEach((sw) => sw.set(lang === 'en' ? EN[sw.key] : sw.vi));
+    langBtns.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+  };
+  langBtns.forEach((b) => b.addEventListener('click', () => {
+    setLang(b.dataset.lang);
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+  }));
+  // ?lang=en in the URL wins, then the saved choice, then the browser language
+  let initial = new URLSearchParams(location.search).get('lang');
+  if (!initial) { try { initial = localStorage.getItem('lang'); } catch (e) {} }
+  if (!initial) initial = (navigator.language || '').toLowerCase().startsWith('vi') ? 'vi' : 'en';
+  setLang(initial);
+
+  // Copy email
+  const toast = document.getElementById('toast');
+  const showToast = (msg) => {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(showToast.t);
+    showToast.t = setTimeout(() => toast.classList.remove('show'), 1800);
+  };
+  document.getElementById('copyBtn').addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText('vudinhhuyit@gmail.com');
+      showToast(lang === 'en' ? 'Email copied ✓' : 'Đã sao chép email ✓');
+    } catch (e) {
+      showToast('vudinhhuyit@gmail.com');
+    }
+  });
+
+  // Reveal on scroll
+  const items = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.12 });
+    items.forEach((el) => io.observe(el));
+  } else {
+    items.forEach((el) => el.classList.add('in'));
+  }
+</script>
+</body>
 </html>
