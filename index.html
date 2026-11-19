@@ -131,13 +131,12 @@
   }
   .portrait .avatar { display: grid; place-items: center; font-size: clamp(88px, 24vw, 128px); font-weight: 800; line-height: 1; color: var(--accent-strong); }
   .float-icon {
-    position: absolute; width: 60px; height: 60px; border-radius: 15px; overflow: hidden;
+    position: absolute; left: var(--x); top: var(--y); margin: -26px 0 0 -26px;
+    width: 52px; height: 52px; border-radius: 13px; overflow: hidden;
     box-shadow: var(--shadow); border: 3px solid var(--card); background: var(--card);
     animation: bob 5s ease-in-out infinite;
   }
   .float-icon img { width: 100%; height: 100%; object-fit: cover; }
-  .float-icon.a { top: 2%; right: 4%; }
-  .float-icon.b { bottom: 8%; left: -2%; animation-delay: -1.6s; }
   @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
   /* Sections */
@@ -151,6 +150,7 @@
   .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
   .grid.three { grid-template-columns: repeat(3, 1fr); margin-top: 20px; }
   .grid + .group-title { margin-top: 44px; }
+  .grid.three { margin-top: 0; }
   .project {
     background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
     padding: 24px; display: flex; flex-direction: column; gap: 14px;
@@ -166,6 +166,7 @@
   .project p { margin: 0; color: var(--muted); font-size: 15px; }
   .tags { display: flex; flex-wrap: wrap; gap: 6px; }
   .tag { font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: var(--bg-soft); color: var(--muted); }
+  .tag.soon { background: var(--accent-soft); color: var(--accent-strong); }
   .tag.live { background: color-mix(in srgb, var(--green) 15%, transparent); color: var(--green); }
   .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 4px; }
   .links a {
@@ -211,6 +212,7 @@
     .hero { padding: 40px 0 32px; }
     .hero-grid { grid-template-columns: 1fr; gap: 36px; }
     .portrait { order: -1; width: min(260px, 70vw); }
+    .float-icon { width: 42px; height: 42px; margin: -21px 0 0 -21px; border-radius: 11px; border-width: 2px; }
     .grid, .grid.three { grid-template-columns: 1fr; }
     .contact { padding: 36px 20px; }
   }
@@ -278,8 +280,14 @@
     <div class="portrait" aria-hidden="true">
       <div class="blob"></div>
       <div class="avatar">H</div>
-      <div class="float-icon a"><img src="https://vudinhhuyit.github.io/Talk-Wallet-Support/icon.png" alt=""></div>
-      <div class="float-icon b"><img src="https://vudinhhuyit.github.io/Doc2Markdown/assets/icons/icon128.png" alt=""></div>
+      <div class="float-icon" style="--x:68.4%;--y:5.7%;animation-delay:-0.0s"><img src="assets/icons/talk-wallet.png" alt="" loading="lazy"></div>
+      <div class="float-icon" style="--x:94.3%;--y:31.6%;animation-delay:-0.7s"><img src="assets/icons/rollventure.png" alt="" loading="lazy"></div>
+      <div class="float-icon" style="--x:94.3%;--y:68.4%;animation-delay:-1.4s"><img src="assets/icons/sugar-draw.png" alt="" loading="lazy"></div>
+      <div class="float-icon" style="--x:68.4%;--y:94.3%;animation-delay:-2.1s"><img src="assets/icons/capybara.png" alt="" loading="lazy"></div>
+      <div class="float-icon" style="--x:31.6%;--y:94.3%;animation-delay:-2.8s"><img src="https://vudinhhuyit.github.io/Doc2Markdown/assets/icons/icon128.png" alt="" loading="lazy"></div>
+      <div class="float-icon" style="--x:5.7%;--y:68.4%;animation-delay:-3.5s"><img src="assets/icons/comic-book-boy.png" alt="" loading="lazy"></div>
+      <div class="float-icon" style="--x:5.7%;--y:31.6%;animation-delay:-4.2s"><img src="assets/icons/sheep-home.png" alt="" loading="lazy"></div>
+      <div class="float-icon" style="--x:31.6%;--y:5.7%;animation-delay:-4.9s"><img src="assets/icons/rollventure2.png" alt="" loading="lazy"></div>
     </div>
   </div>
 </header>
@@ -293,30 +301,160 @@
       <div class="group-title">📱 <span data-i18n="projects.ios">Ứng dụng iOS</span> <span class="count">1</span></div>
       <div class="grid">
         <article class="project wide reveal">
-          <img class="shot" src="assets/talk-wallet.jpg" width="2000" height="1125" loading="lazy" data-i18n-alt="tw.shot"
-               alt="Talk Wallet — Quản lý tài chính qua giọng nói: nói “Ăn trưa 50k”, app ghi −50.000 ₫ vào danh mục Ăn uống">
           <div class="p-head">
-            <img class="app-icon" src="https://vudinhhuyit.github.io/Talk-Wallet-Support/icon.png" alt="Biểu tượng Talk Wallet" data-i18n-alt="tw.icon" loading="lazy">
+            <img class="app-icon" src="assets/icons/talk-wallet.png" alt="Biểu tượng Talk Wallet" data-i18n-alt="tw.icon" loading="lazy">
             <div>
               <h3>Talk Wallet</h3>
               <div class="sub" data-i18n="tw.sub">Quản lý tài chính qua giọng nói</div>
             </div>
           </div>
-          <p data-i18n="tw.desc">
-            Nói một câu — Talk Wallet ghi thu chi, chia danh mục và học cách bạn nói. Chỉ cần nói “Ăn trưa 50k”,
-            app tự ghi −50.000 ₫ vào mục Ăn uống, cho bạn xem trước giao dịch trước khi lưu. Hiểu cả tiếng lóng
-            như “5 củ”, “năm chục”; có tổng quan theo ngày/tuần/tháng/năm, biểu đồ theo danh mục, ngân sách tháng
-            và các khoản hay dùng chỉ cần chạm để ghi.
-          </p>
+          <p data-i18n="tw.desc">Nói một câu — Talk Wallet ghi thu chi, chia danh mục và học cách bạn nói. Chỉ cần nói “Ăn trưa 50k”, app tự ghi −50.000 ₫ vào mục Ăn uống, cho bạn xem trước giao dịch trước khi lưu. Hiểu cả tiếng lóng như “5 củ”, “năm chục”. Ghi nhanh bằng Siri, Apple Watch, widget và Live Activity; có tổng quan theo ngày/tuần/tháng/năm, lịch heatmap, biểu đồ theo danh mục, ngân sách tháng, và trợ lý FinCo để hỏi đáp và phân tích chi tiêu của bạn.</p>
           <div class="tags">
             <span class="tag live" data-i18n="tw.tag1">● Đã có trên App Store</span>
             <span class="tag" data-i18n="tw.tag2">Nhận diện giọng nói</span>
             <span class="tag" data-i18n="tw.tag3">Tài chính cá nhân</span>
+            <span class="tag" data-i18n="tw.tag4">Apple Watch & Siri</span>
+            <span class="tag" data-i18n="tw.tag5">Trợ lý AI FinCo</span>
           </div>
           <div class="links">
             <a class="go" href="https://apps.apple.com/app/id6822734483" target="_blank" rel="noopener" data-i18n="tw.download">Tải trên App Store</a>
             <a href="/Talk-Wallet-Support/" data-i18n="common.more">Trang giới thiệu</a>
           </div>
+        </article>
+      </div>
+
+      <div class="group-title">🎮 <span data-i18n="projects.games">Game</span> <span class="count">6</span></div>
+      <div class="grid three">
+        <article class="project reveal">
+          <div class="p-head">
+            <img class="app-icon" src="assets/icons/rollventure.png" alt="" width="64" height="64" loading="lazy">
+            <div>
+              <h3>Rollventure</h3>
+              <div class="sub" data-i18n="rv1.sub">Quả bóng đỏ phiêu lưu</div>
+            </div>
+          </div>
+          <p data-i18n="rv1.desc">Platformer vật lý với 12 màn chơi thủ công: lăn và nảy quả bóng đỏ, cưỡi thang máy, xe hơi và lò xo, né rìu đung đưa và bãi gai nhọn.</p>
+          <div class="tags"><span class="tag live" data-i18n="rv1.t0">● Đã có trên App Store</span><span class="tag" data-i18n="rv1.t1">SpriteKit</span><span class="tag" data-i18n="rv1.t2">12 màn chơi</span></div>
+          <div class="links"><a class="go" href="https://apps.apple.com/app/id6822674819" target="_blank" rel="noopener" data-i18n="tw.download">Tải trên App Store</a></div>
+        </article>
+        <article class="project reveal">
+          <div class="p-head">
+            <img class="app-icon" src="assets/icons/rollventure2.png" alt="" width="64" height="64" loading="lazy">
+            <div>
+              <h3>Rollventure 2</h3>
+              <div class="sub" data-i18n="rv2.sub">Phần tiếp theo, 25 màn chơi</div>
+            </div>
+          </div>
+          <p data-i18n="rv2.desc">Quả bóng đỏ trở lại với 25 màn giải đố vật lý. Thu thập sao, né gai nhọn, vượt qua nước và chạm tới lá cờ. Hỗ trợ 8 ngôn ngữ.</p>
+          <div class="tags"><span class="tag live" data-i18n="rv2.t0">● Đã có trên App Store</span><span class="tag" data-i18n="rv2.t1">SpriteKit</span><span class="tag" data-i18n="rv2.t2">25 màn chơi</span></div>
+          <div class="links"><a class="go" href="https://apps.apple.com/app/id6835279388" target="_blank" rel="noopener" data-i18n="tw.download">Tải trên App Store</a></div>
+        </article>
+        <article class="project reveal">
+          <div class="p-head">
+            <img class="app-icon" src="assets/icons/sugar-draw.png" alt="" width="64" height="64" loading="lazy">
+            <div>
+              <h3>Sugar Draw</h3>
+              <div class="sub" data-i18n="sd1.sub">Vẽ đường dẫn đường vào cốc</div>
+            </div>
+          </div>
+          <p data-i18n="sd1.desc">Vẽ đường để dẫn dòng đường rơi vào những chiếc cốc. 30 màn giải đố vật lý thư giãn với bộ lọc màu, cốc úp ngược và nút đổi trọng lực.</p>
+          <div class="tags"><span class="tag live" data-i18n="sd1.t0">● Đã có trên App Store</span><span class="tag" data-i18n="sd1.t1">Puzzle</span><span class="tag" data-i18n="sd1.t2">30 màn chơi</span></div>
+          <div class="links"><a class="go" href="https://apps.apple.com/us/app/sugar-draw/id6834115148" target="_blank" rel="noopener" data-i18n="tw.download">Tải trên App Store</a></div>
+        </article>
+        <article class="project reveal">
+          <div class="p-head">
+            <img class="app-icon" src="assets/icons/capybara.png" alt="" width="64" height="64" loading="lazy">
+            <div>
+              <h3>Capybara Around the World</h3>
+              <div class="sub" data-i18n="capy.sub">Cho capy ăn, đập băng</div>
+            </div>
+          </div>
+          <p data-i18n="capy.desc">Đập băng, phóng thức ăn và cho chú capybara đói ăn qua 30 màn giải đố vật lý ở sáu quốc gia. Thu thập đủ sao để đạt điểm cao nhất. Chơi được offline.</p>
+          <div class="tags"><span class="tag live" data-i18n="capy.t0">● Đã có trên App Store</span><span class="tag" data-i18n="capy.t1">Puzzle</span><span class="tag" data-i18n="capy.t2">Vật lý</span></div>
+          <div class="links"><a class="go" href="https://apps.apple.com/us/app/capybara-around-the-world/id6829455439" target="_blank" rel="noopener" data-i18n="tw.download">Tải trên App Store</a></div>
+        </article>
+        <article class="project reveal">
+          <div class="p-head">
+            <img class="app-icon" src="assets/icons/comic-book-boy.png" alt="" width="64" height="64" loading="lazy">
+            <div>
+              <h3>Comic Book Boy</h3>
+              <div class="sub" data-i18n="cbb.sub">Sưu tầm truyện, hóa anh hùng</div>
+            </div>
+          </div>
+          <p data-i18n="cbb.desc">Bọn trộm đã lấy cắp truyện tranh của Boy! Hóa thân thành Amazing Man, Blizzard Boy hay Kid Lightning, đánh bại bọn trộm và ba trùm cuối qua 36 màn platformer đầy hành động.</p>
+          <div class="tags"><span class="tag live" data-i18n="cbb.t0">● Đã có trên App Store</span><span class="tag" data-i18n="cbb.t1">Platformer</span><span class="tag" data-i18n="cbb.t2">36 màn chơi</span></div>
+          <div class="links"><a class="go" href="https://apps.apple.com/us/app/comic-book-boy/id6830351614" target="_blank" rel="noopener" data-i18n="tw.download">Tải trên App Store</a></div>
+        </article>
+        <article class="project reveal">
+          <div class="p-head">
+            <img class="app-icon" src="assets/icons/sheep-home.png" alt="" width="64" height="64" loading="lazy">
+            <div>
+              <h3>The Sheep’s Journey Home</h3>
+              <div class="sub" data-i18n="sheep.sub">Đưa 3 chú cừu về nhà</div>
+            </div>
+          </div>
+          <p data-i18n="sheep.desc">Ba chú cừu, một con đường về nhà! Đổi qua lại giữa Rocky, Billy và Tiny, tận dụng sở trường của từng chú để vượt 15 màn chơi.</p>
+          <div class="tags"><span class="tag live" data-i18n="sheep.t0">● Đã có trên App Store</span><span class="tag" data-i18n="sheep.t1">Puzzle</span><span class="tag" data-i18n="sheep.t2">15 màn chơi</span></div>
+          <div class="links"><a class="go" href="https://apps.apple.com/us/app/the-sheeps-journey-home/id6833267348" target="_blank" rel="noopener" data-i18n="tw.download">Tải trên App Store</a></div>
+        </article>
+      </div>
+
+      <div class="group-title">🚀 <span data-i18n="projects.soon">Sắp ra mắt</span> <span class="count">5</span></div>
+      <div class="grid three">
+        <article class="project reveal">
+          <div class="p-head">
+            <img class="app-icon" src="assets/icons/game-hub.png" alt="" width="64" height="64" loading="lazy">
+            <div>
+              <h3>2D Game Hub</h3>
+              <div class="sub" data-i18n="hub.sub">Tuyển tập nhiều game trong một app</div>
+            </div>
+          </div>
+          <p data-i18n="hub.desc">Một app chứa cả bộ sưu tập game 2D của mình: Red Ball, Sugar Draw, Capy Around the World, Colorful Penguins, Snoring, Candy Thieves, Home Sheep Home… Cài một lần, chơi tất cả.</p>
+          <div class="tags"><span class="tag soon" data-i18n="hub.soon">◔ Sắp ra mắt</span><span class="tag" data-i18n="hub.t0">Nhiều game</span><span class="tag" data-i18n="hub.t1">iPhone & iPad</span></div>
+        </article>
+        <article class="project reveal">
+          <div class="p-head">
+            <img class="app-icon" src="assets/icons/rollventure.png" alt="" width="64" height="64" loading="lazy">
+            <div>
+              <h3>Rollventure 3</h3>
+              <div class="sub" data-i18n="rv3.sub">Chương tiếp theo của series</div>
+            </div>
+          </div>
+          <p data-i18n="rv3.desc">Hành trình của quả bóng đỏ tiếp tục với chương mới của series Rollventure.</p>
+          <div class="tags"><span class="tag soon" data-i18n="rv3.soon">◔ Sắp ra mắt</span><span class="tag" data-i18n="rv3.t0">SpriteKit</span><span class="tag" data-i18n="rv3.t1">Platformer</span></div>
+        </article>
+        <article class="project reveal">
+          <div class="p-head">
+            <img class="app-icon" src="assets/icons/sugar-draw-2.png" alt="" width="64" height="64" loading="lazy">
+            <div>
+              <h3>Sugar Draw 2</h3>
+              <div class="sub" data-i18n="sd2.sub">Thêm cổng dịch chuyển</div>
+            </div>
+          </div>
+          <p data-i18n="sd2.desc">Phần tiếp theo của Sugar Draw với cổng dịch chuyển đưa dòng đường sang chỗ khác và những chiếc cốc sọc hai màu.</p>
+          <div class="tags"><span class="tag soon" data-i18n="sd2.soon">◔ Sắp ra mắt</span><span class="tag" data-i18n="sd2.t0">SpriteKit</span><span class="tag" data-i18n="sd2.t1">Puzzle</span></div>
+        </article>
+        <article class="project reveal">
+          <div class="p-head">
+            <img class="app-icon" src="assets/icons/sugar-draw-3.png" alt="" width="64" height="64" loading="lazy">
+            <div>
+              <h3>Sugar Draw 3</h3>
+              <div class="sub" data-i18n="sd3.sub">Bánh quy và cốc kén màu</div>
+            </div>
+          </div>
+          <p data-i18n="sd3.desc">Thêm cổng dịch chuyển, bánh quy làm vật cản và những chiếc cốc kén chọn: đường sai màu rơi vào là thua.</p>
+          <div class="tags"><span class="tag soon" data-i18n="sd3.soon">◔ Sắp ra mắt</span><span class="tag" data-i18n="sd3.t0">SpriteKit</span><span class="tag" data-i18n="sd3.t1">Puzzle</span></div>
+        </article>
+        <article class="project reveal">
+          <div class="p-head">
+            <img class="app-icon" src="assets/icons/pipe-riders.png" alt="" width="64" height="64" loading="lazy">
+            <div>
+              <h3>Pipe Riders</h3>
+              <div class="sub" data-i18n="pr.sub">Đua trong đường hầm neon</div>
+            </div>
+          </div>
+          <p data-i18n="pr.desc">Lái xe quanh thành trong của đường hầm neon đổi màu liên tục. Né chướng ngại, nhặt thưởng, giẫm bệ tăng tốc để lập kỷ lục mới.</p>
+          <div class="tags"><span class="tag soon" data-i18n="pr.soon">◔ Sắp ra mắt</span><span class="tag" data-i18n="pr.t0">Racing</span><span class="tag" data-i18n="pr.t1">Arcade</span></div>
         </article>
       </div>
 
@@ -490,15 +628,73 @@
     'projects.title': 'Things I’ve built on GitHub',
     'projects.ios': 'iOS apps',
     'projects.tools': 'Productivity tools',
-    'tw.shot': 'Talk Wallet — manage your money by voice: say “Lunch 50k” and the app records −50,000 ₫ under Food',
     'tw.icon': 'Talk Wallet icon',
     'tw.sub': 'Manage your money by voice',
-    'tw.desc': 'Say one sentence — Talk Wallet records income and expenses, sorts them into categories and learns how you talk. Just say “Ăn trưa 50k” (lunch 50k) and it logs −50,000 ₫ under Food, letting you preview the transaction before saving. It even understands Vietnamese slang like “5 củ” and “năm chục”, with daily/weekly/monthly/yearly overviews, category charts, monthly budgets and one-tap shortcuts for frequent expenses.',
+    'tw.desc': 'Say one sentence — Talk Wallet records income and expenses, sorts them into categories and learns how you talk. Just say “Ăn trưa 50k” (lunch 50k) and it logs −50,000 ₫ under Food, letting you preview the transaction before saving. It even understands Vietnamese slang like “5 củ” and “năm chục”. Log in a flash with Siri, Apple Watch, widgets and Live Activities; get daily/weekly/monthly/yearly overviews, a heatmap calendar, category charts, monthly budgets, and FinCo, an assistant you can ask about and analyze your spending with.',
     'tw.tag1': '● On the App Store',
     'tw.tag2': 'Speech recognition',
     'tw.tag3': 'Personal finance',
+    'tw.tag4': 'Apple Watch & Siri',
+    'tw.tag5': 'FinCo AI assistant',
     'tw.download': 'Download on the App Store',
     'common.more': 'Learn more',
+    'rv1.sub': 'The red ball’s adventure',
+    'rv1.desc': 'A physics platformer with 12 hand-crafted levels: roll and bounce the red ball, ride lifts, cars and springboards, and dodge swinging axes and sharp spikes.',
+    'rv1.t0': '● On the App Store',
+    'rv1.t1': 'SpriteKit',
+    'rv1.t2': '12 levels',
+    'rv2.sub': 'The sequel, 25 levels',
+    'rv2.desc': 'The red ball is back with 25 physics-puzzle levels. Collect stars, dodge spikes, cross water and reach the flag. Available in 8 languages.',
+    'rv2.t0': '● On the App Store',
+    'rv2.t1': 'SpriteKit',
+    'rv2.t2': '25 levels',
+    'sd1.sub': 'Draw lines to pour sugar',
+    'sd1.desc': 'Draw lines to guide the pouring sugar into the cups. 30 relaxing physics puzzles with colour filters, upside-down cups and gravity switches.',
+    'sd1.t0': '● On the App Store',
+    'sd1.t1': 'Puzzle',
+    'sd1.t2': '30 levels',
+    'hub.sub': 'Many games in one app',
+    'hub.desc': 'One app holding my whole collection of 2D games: Red Ball, Sugar Draw, Capy Around the World, Colorful Penguins, Snoring, Candy Thieves, Home Sheep Home and more. Install once, play them all.',
+    'hub.t0': 'Many games',
+    'hub.t1': 'iPhone & iPad',
+    'hub.soon': '◔ Coming soon',
+    'rv3.sub': 'The next chapter',
+    'rv3.desc': 'The red ball’s journey continues in a new chapter of the Rollventure series.',
+    'rv3.t0': 'SpriteKit',
+    'rv3.t1': 'Platformer',
+    'rv3.soon': '◔ Coming soon',
+    'sd2.sub': 'Now with teleporters',
+    'sd2.desc': 'The follow-up to Sugar Draw, with teleporters that send the sugar somewhere else and two-colour striped cups.',
+    'sd2.t0': 'SpriteKit',
+    'sd2.t1': 'Puzzle',
+    'sd2.soon': '◔ Coming soon',
+    'sd3.sub': 'Cookies and picky cups',
+    'sd3.desc': 'Adds teleporters, cookies as obstacles and picky cups: sugar of the wrong colour means you lose the level.',
+    'sd3.t0': 'SpriteKit',
+    'sd3.t1': 'Puzzle',
+    'sd3.soon': '◔ Coming soon',
+    'pr.sub': 'Neon tunnel racing',
+    'pr.desc': 'Race around the inside of a glowing neon tunnel that shifts colour as you ride. Dodge obstacles, grab bonuses and hit boost pads for a new high score.',
+    'pr.t0': 'Racing',
+    'pr.t1': 'Arcade',
+    'pr.soon': '◔ Coming soon',
+    'projects.games': 'Games',
+    'projects.soon': 'Coming soon',
+    'capy.sub': 'Feed the capy, pop the ice',
+    'capy.desc': 'Pop the ice, launch the food and feed the hungry capybara in 30 physics puzzles across six countries. Collect every star for the best score. Plays offline.',
+    'capy.t0': '● On the App Store',
+    'capy.t1': 'Puzzle',
+    'capy.t2': 'Physics',
+    'cbb.sub': 'Collect comics, become a hero',
+    'cbb.desc': 'Burglars stole Boy’s comics! Become Amazing Man, Blizzard Boy or Kid Lightning, defeat the thieves and three big bosses across 36 action-packed platformer levels.',
+    'cbb.t0': '● On the App Store',
+    'cbb.t1': 'Platformer',
+    'cbb.t2': '36 levels',
+    'sheep.sub': 'Guide Rocky, Billy & Tiny home',
+    'sheep.desc': 'Three sheep, one way home! Switch between Rocky, Billy and Tiny, use each one’s skills and solve 15 puzzle levels.',
+    'sheep.t0': '● On the App Store',
+    'sheep.t1': 'Puzzle',
+    'sheep.t2': '15 levels',
     'd2m.icon': 'Doc → Markdown icon',
     'd2m.desc': 'Convert Word, Excel and PDF files to clean Markdown and view Markdown GitHub-style, right in your browser. Everything runs on your device; your files are never uploaded.',
     'd2m.tag': '● Try it now',
