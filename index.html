@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vũ Đình Huy · Lập trình viên phát triển ứng dụng</title>
-<meta name="description" content="Vũ Đình Huy — Lập trình viên phát triển ứng dụng tại Hà Nội. Các ứng dụng và công cụ do mình tự làm.">
+<meta name="description" content="Vũ Đình Huy — Lập trình viên phát triển ứng dụng tại Hà Nội. Các ứng dụng và công cụ do tôi tự làm.">
 <meta property="og:title" content="Vũ Đình Huy · Lập trình viên phát triển ứng dụng">
-<meta property="og:description" content="Lập trình viên phát triển ứng dụng tại Hà Nội. Xem các ứng dụng và dự án cá nhân của mình.">
+<meta property="og:description" content="Lập trình viên phát triển ứng dụng tại Hà Nội. Xem các ứng dụng và dự án cá nhân của tôi.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23fcf1ff%22/%3E%3Ctext x=%2250%22 y=%2268%22 text-anchor=%22middle%22 font-family=%22Arial,sans-serif%22 font-weight=%22800%22 font-size=%2252%22 fill=%22%232b1236%22%3EH%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -147,6 +147,7 @@
   /* Projects */
   .group-title { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 700; margin: 0 0 16px; }
   .group-title .count { font-size: 13px; font-weight: 600; color: var(--muted); background: var(--bg-soft); border: 1px solid var(--line); padding: 2px 10px; border-radius: 999px; }
+  .group-desc { color: var(--muted); max-width: 40em; margin: -6px 0 18px; }
   .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
   .grid.three { grid-template-columns: repeat(3, 1fr); margin-top: 20px; }
   .grid + .group-title { margin-top: 44px; }
@@ -247,7 +248,7 @@
   <div class="wrap hero-grid">
     <div>
       <span class="hello"><span class="wave">👋</span> <span data-i18n="hero.hello">Xin chào, rất vui được gặp bạn!</span></span>
-      <h1 data-i18n="hero.title">Mình là <span class="hl">Huy</span>.</h1>
+      <h1 data-i18n="hero.title">Tôi là <span class="hl">Huy</span>.</h1>
       <div class="socials">
         <a class="btn sm" href="https://github.com/vudinhhuyit" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3"/></svg>
@@ -280,17 +281,6 @@
     <div class="portrait" aria-hidden="true">
       <div class="blob"></div>
       <div class="avatar">H</div>
-      <div class="float-icon" style="--x:63.5%;--y:3.9%;animation-delay:-0.0s"><img src="assets/icons/talk-wallet.png" alt="" loading="lazy"></div>
-      <div class="float-icon" style="--x:86.3%;--y:18.6%;animation-delay:-0.5s"><img src="assets/icons/rollventure.png" alt="" loading="lazy"></div>
-      <div class="float-icon" style="--x:97.5%;--y:43.2%;animation-delay:-1.0s"><img src="assets/icons/sugar-draw.png" alt="" loading="lazy"></div>
-      <div class="float-icon" style="--x:93.7%;--y:69.9%;animation-delay:-1.5s"><img src="assets/icons/sugar-draw-2.png" alt="" loading="lazy"></div>
-      <div class="float-icon" style="--x:76.0%;--y:90.4%;animation-delay:-2.0s"><img src="assets/icons/sugar-draw-3.png" alt="" loading="lazy"></div>
-      <div class="float-icon" style="--x:50.0%;--y:98.0%;animation-delay:-2.5s"><img src="assets/icons/sugar-draw-christmas.png" alt="" loading="lazy"></div>
-      <div class="float-icon" style="--x:24.0%;--y:90.4%;animation-delay:-2.9s"><img src="assets/icons/capybara.png" alt="" loading="lazy"></div>
-      <div class="float-icon" style="--x:6.3%;--y:69.9%;animation-delay:-3.4s"><img src="https://vudinhhuyit.github.io/Doc2Markdown/assets/icons/icon128.png" alt="" loading="lazy"></div>
-      <div class="float-icon" style="--x:2.5%;--y:43.2%;animation-delay:-3.9s"><img src="assets/icons/comic-book-boy.png" alt="" loading="lazy"></div>
-      <div class="float-icon" style="--x:13.7%;--y:18.6%;animation-delay:-4.4s"><img src="assets/icons/sheep-home.png" alt="" loading="lazy"></div>
-      <div class="float-icon" style="--x:36.5%;--y:3.9%;animation-delay:-4.9s"><img src="assets/icons/rollventure2.png" alt="" loading="lazy"></div>
     </div>
   </div>
 </header>
@@ -299,7 +289,7 @@
   <section id="projects">
     <div class="wrap">
       <div class="eyebrow" data-i18n="projects.eyebrow">Dự án cá nhân</div>
-      <h2 style="margin-bottom: 32px" data-i18n="projects.title">Những thứ mình đã làm ra trên GitHub</h2>
+      <h2 style="margin-bottom: 32px" data-i18n="projects.title">Những thứ tôi đã làm ra trên GitHub</h2>
 
       <div class="group-title">📱 <span data-i18n="projects.ios">Ứng dụng iOS</span> <span class="count">1</span></div>
       <div class="grid">
@@ -336,7 +326,7 @@
               <div class="sub" data-i18n="hub.sub">Tuyển tập nhiều game trong một app</div>
             </div>
           </div>
-          <p data-i18n="hub.desc">Một app chứa cả bộ sưu tập game 2D của mình: Red Ball, Sugar Draw, Capy Around the World, Colorful Penguins, Snoring, Candy Thieves, Home Sheep Home… Cài một lần, chơi tất cả.</p>
+          <p data-i18n="hub.desc">Một app chứa cả bộ sưu tập game 2D của tôi: Red Ball, Sugar Draw, Capy Around the World, Colorful Penguins, Snoring, Candy Thieves, Home Sheep Home… Cài một lần, chơi tất cả.</p>
           <div class="tags"><span class="tag live" data-i18n="hub.live">● Đã có trên App Store</span><span class="tag" data-i18n="hub.t0">Nhiều game</span><span class="tag" data-i18n="hub.t1">iPhone & iPad</span></div>
           <div class="links"><a class="go" href="https://apps.apple.com/vn/app/2d-game-hub/id6831881081" target="_blank" rel="noopener" data-i18n="tw.download">Tải trên App Store</a></div>
         </article>
@@ -546,6 +536,7 @@
       -->
 
       <div class="group-title">🛠️ <span data-i18n="projects.tools">Công cụ năng suất</span> <span class="count">1</span></div>
+      <p class="group-desc" data-i18n="projects.toolsDesc">Tôi xây dựng các công cụ nhỏ giúp tối ưu và tăng hiệu suất trong công việc lẫn cuộc sống.</p>
       <div class="grid">
         <article class="project wide reveal">
           <div class="p-head">
@@ -593,7 +584,7 @@
     <div class="wrap">
       <div class="contact reveal">
         <h2 data-i18n="contact.title">Cùng làm điều gì đó hay ho nhé! ☕</h2>
-        <p data-i18n="contact.text">Có ý tưởng ứng dụng, cơ hội hợp tác hay chỉ muốn chào hỏi? Hộp thư của mình luôn mở, mình sẽ phản hồi sớm nhất có thể.</p>
+        <p data-i18n="contact.text">Có ý tưởng ứng dụng, cơ hội hợp tác hay chỉ muốn chào hỏi? Hộp thư của tôi luôn mở, tôi sẽ phản hồi sớm nhất có thể.</p>
         <div class="ctas">
           <a class="btn primary" href="mailto:vudinhhuyit@gmail.com" id="emailBtn">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg>
@@ -657,6 +648,7 @@
     'projects.title': 'Things I’ve built on GitHub',
     'projects.ios': 'iOS apps',
     'projects.tools': 'Productivity tools',
+    'projects.toolsDesc': 'Small tools I build to work smarter and get more done, at work and in everyday life.',
     'tw.icon': 'Talk Wallet icon',
     'tw.sub': 'Manage your money by voice',
     'tw.desc': 'Say one sentence — Talk Wallet records income and expenses, sorts them into categories and learns how you talk. Just say “Ăn trưa 50k” (lunch 50k) and it logs −50,000 ₫ under Food, letting you preview the transaction before saving. It even understands Vietnamese slang like “5 củ” and “năm chục”. Log in a flash with Siri, Apple Watch, widgets and Live Activities; get daily/weekly/monthly/yearly overviews, a heatmap calendar, category charts, monthly budgets, and FinCo, an assistant you can ask about and analyze your spending with.',
